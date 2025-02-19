@@ -41,3 +41,15 @@ Dažos gadījumos frontend konteiners nepalaižas. Šajā gadījumā jums manuā
 
 
 Lai piekļūtu projektam dodies uz `localhost` no jebkura pārlūka. (vai arī uz `localhost:port`, ja esi mainījis nginx konfigurāciju)
+
+### Code Explanation
+
+- Koda bāze ir Laravel Jetstream
+- Priekš Frontend tiek lietots Vue3
+- HTTP pieprasījumiem tiek lietots Axios
+- Validācijai Frontend daļā tiek lietota bibliotēka yup
+- Backend daļā tiek izmantots Factory princips, jo visticamāks, šīs nav pēdējais solis kredīta saņemšanai un nāksies vēl papildināt ar KYC, AML, rekvizīti u.t.t. Manā praksē, tādi soļi šādam tipa projektam var būt no 4 līdz 8.
+- Loan modelis ir viegli paplašinājams. 
+- Frontend ir veidots pievilcīgi, bet minimāli un ar iespēju katru moduli rediģēt. Par cik klientam nav konkrētas dizaina prasības un tiek prasīta "sava vīzija", manuprāt, jāsāk ar minimālo, lai turpmāk varētu "pataustot", izdomāt labāku risinājumu.
+- Frontend daļu var izpētīt `/app/resources/Components/Calculator` mapē.
+- Backend daļa ir iekš `/app/app` vairākās vietās.
