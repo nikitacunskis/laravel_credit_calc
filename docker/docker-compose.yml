@@ -1,0 +1,55 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.app
+    container_name: app
+    volumes:
+      - ../app:/var/www/html
+    environment:
+      - APP_ENV=local
+      - APP_DEBUG=true
+    ports:
+      - 9000:9000
+    depends_on:
+      - db
+    command: php-fpm
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    volumes:
+      - ../app:/var/www/html
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - 80:80
+    depends_on:
+      - app
+
+  db:
+    image: mysql:8.0
+    container_name: db
+    restart: always
+    environment:
+      MYSQL_DATABASE: cedits
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - 3306:3306
+    volumes:
+      - db_data:/var/lib/mysql
+
+  frontend:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.frontend
+    container_name: frontend
+    volumes:
+      - ../app:/var/www/html
+    ports:
+      - 5173:5173
+    command: ["npm", "run", "dev"]
+
+volumes:
+  db_data:

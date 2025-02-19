@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ../app:/app
+    ports:
+      - "9001:9000"
+
+volumes:
+  db_data:
